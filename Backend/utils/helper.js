@@ -93,7 +93,8 @@ const generateToken = async (
   firstName,
   lastName,
   phoneNumber,
-  isAdmin
+  isAdmin,
+  _id
 ) => {
   return await  jwt.sign(
     {
@@ -103,6 +104,7 @@ const generateToken = async (
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
+      id:_id
     },
     process.env.JWT_PRIVATE_KEY,
     { expiresIn: "1d" }
@@ -138,6 +140,20 @@ const decodeJwt = async (token) => {
   const decode = await jwtDecode(token);
   return decode;
 };
+const generateLoginToken = async (
+  email,
+  _id
+) => {
+  return await  jwt.sign(
+    {
+      email: email,
+      id:_id
+    },
+    process.env.JWT_PRIVATE_KEY,
+    { expiresIn: "1d" }
+  );
+};
+
 // const refreshToken = async ()
 module.exports = {
   hasPassword,
@@ -148,5 +164,6 @@ module.exports = {
   generateToken,
   verifyToken,
   decodeJwt,
-  generateRefreshToken
+  generateRefreshToken,
+  generateLoginToken
 };

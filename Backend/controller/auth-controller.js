@@ -6,6 +6,7 @@ const {
   sendOtpToNumber,
   generateToken,
   comparePassword,
+  generateLoginToken
 } = require("../utils/helper");
 const bcrypt = require("bcrypt");
 const Otp = require("../models/user-verification");
@@ -26,10 +27,10 @@ const userRegister = async (req, res) => {
   try {
     const { email, firstName, lastName, password, phoneNumber, isAdmin } =
       req.body;
-    console.log(req.body, "req.body");
+    // console.log(req.body, "req.body");
 
     const isPresent = await User.findOne({ email: email });
-    console.log(isPresent, "isPresent");
+    // console.log(isPresent, "isPresent");
     if (isPresent) {
       res.send("user already present");
     } else {
@@ -98,6 +99,7 @@ const userLogin = async (req, res) => {
       res.status(400).send({ message: "Invalid credentials" });
     }
     const isPresent = await User.findOne({ email: email });
+    // console.log(isPresent,"ispresent")
     if (isPresent) {
       const decryptPassword = await comparePassword(password,isPresent.password);
       if (decryptPassword == true) {
@@ -107,12 +109,13 @@ const userLogin = async (req, res) => {
           { otp: myOtp },
           { new: true, upsert: true, setDefaultsOnInsert: true }
         );
+        const resOtp = myOtp
         const mail = await sendMail(email, myOtp);
-        const token = await generateToken(email, password);
+        const token = await generateLoginToken(email,isPresent._id);
         res
           .status(200)
-          .send({ message: "otp send to your email or  phone ", token: token });
-        console.log(passwordmatched, "matched");
+          .send({ message: "otp send to your email or  phone ", token: token ,otp:resOtp});
+        // console.log(passwordmatched, "matched");
       }else{
         res.status(400).send({message:"Invalid email or password"})
       }
