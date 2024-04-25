@@ -1,8 +1,10 @@
 import Layout from "@/Components/Common/layout/layout";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { configureAppStore } from "../src/redux/store";
+import { store } from '../src/redux/store';
 import { Provider } from "react-redux";
+
+
 export default function App({ Component, pageProps }: AppProps) {
   console.log(Layout, "component");
   const initialState = {
@@ -10,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
     utilities: { popUp: true },
   };
 
-  const store = configureAppStore(initialState);
+
   return (
     <>
       <Provider store={store}>

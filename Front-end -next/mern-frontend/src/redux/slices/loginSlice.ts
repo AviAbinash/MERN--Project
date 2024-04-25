@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 // import { getData, postData,postMethod } from "../../service/http";
 // import { setLoading } from "./maps";
-import { AppDispatch } from "../store";
+// import { AppDispatch } from "../store";
 // import { DashboardRes } from "../../types/Dashboard";
 import { Dispatch } from "../../Types/login";
 import axios from "axios";
@@ -27,9 +27,17 @@ export const postLogin: any = createAsyncThunk(
   async (data: any, { dispatch }: Dispatch) => {
     try {
       //   dispatch(setLoading(true));
-      const response: any = await axios.get(
-        "https://fakestoreapi.com/products"
+      const response: any = await axios.post(
+        "http://localhost:8080/auth/login",
+        { email: data?.email, password: data?.password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
+
       //   dispatch(setLoading(false));
       dispatch(setLoginRes(response?.data));
       return response;

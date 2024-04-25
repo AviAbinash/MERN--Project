@@ -1,9 +1,10 @@
+import LoginForm from '@/Components/Common/forms/loginForm'
 import React from 'react'
 
 const index = () => {
   return (
     <div>
-      login
+      <LoginForm />
     </div>
   )
 }

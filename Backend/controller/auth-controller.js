@@ -27,12 +27,12 @@ const userRegister = async (req, res) => {
   try {
     const { email, firstName, lastName, password, phoneNumber, isAdmin } =
       req.body;
-    // console.log(req.body, "req.body");
+    console.log(req.body, "req.body");
 
     const isPresent = await User.findOne({ email: email });
     // console.log(isPresent, "isPresent");
     if (isPresent) {
-      res.send("user already present");
+      res.status(400).send({message:"user already present"});
     } else {
       // const hashedPassword = await hasPassword(password)
       // const userCreated = await User.create({
@@ -82,6 +82,8 @@ const userRegister = async (req, res) => {
         message: "otp sent to your email and phone number",
         otp: myOtp,
         token: token,
+        email:email,
+        isRegitser:true
         // refreshToken: await User.refreshToken(),
       });
     }

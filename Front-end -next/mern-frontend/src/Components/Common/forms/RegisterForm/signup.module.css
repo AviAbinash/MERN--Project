@@ -1,0 +1,82 @@
+.title{
+    font-weight: 600;
+    padding: 7px 0px;
+}
+.marginBottoms{
+    margin-bottom: 10px;
+}
+.img{
+    margin: '0px 8px';
+    margin-right: 5px;
+}
+.buttonText{
+    text-transform: "capitalize";
+    padding: "5.5px",
+}
+.email{
+    margin-top: 5px;
+}
+
+.sign-up-form  fieldset {
+    /* top: 0; */
+}
+
+.sign-up-form label[data-shrink="true"] {
+    transform: translate(14px, 0) scale(0.75);
+}
+
+.sign-up-form label[data-shrink="true"] + div span {
+    padding-inline: 0;
+}
+
+div:has(.flex-main-container) {
+    height: 100%;
+}
+
+.flex-main-container > div {
+    /* margin-top: 30px; */
+}
+
+p.disclaimer {
+    font-size: 14px !important;
+    line-height: 20px !important;
+    margin-top: 16px;
+    margin-bottom: 20px;
+}
+
+.passsword-fields {
+    /* gap: 7px; */
+    justify-content: space-between;
+}
+
+.passsword-fields > div {
+    flex: 1 0 auto;
+}
+
+.sign-up-btn {
+    margin-top: 15px;
+}
+
+@media (max-width: 991px) {
+    .passsword-fields {
+        /* gap: 4px; */
+    }
+}
+@media (max-width: 575px) {
+    .sub-title {
+        font-size: 0.8em !important;
+    }
+    .sign-up-btn {
+        margin-top: 10px;
+    }
+    p.disclaimer {
+        font-size: 0.6em !important;
+        margin-top: 5px;
+    }
+    div:has(.flex-main-container) {
+        /* padding-block: 8px;
+        height: 106%;
+        top: -3%;
+        overflow-y: scroll; */
+    }
+}
